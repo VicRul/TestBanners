@@ -1,9 +1,12 @@
 package test.jarsoft.banners.dto;
 
+import org.springframework.stereotype.Component;
+
 import test.jarsoft.banners.domain.Banner;
 import test.jarsoft.banners.domain.Category;
 import test.jarsoft.banners.domain.Request;
 
+@Component
 public class DtoConverter {
 
 	public BannerDto bannerToBannerDto(Banner banner) {
