@@ -25,7 +25,6 @@ public class DtoConverter {
 		banner.setContent(bannerDto.getContent());
 		banner.setName(bannerDto.getName());
 		banner.setPrice(bannerDto.getPrice());
-		banner.setDeleted(bannerDto.isDeleted());
 		
 		return banner;
 	}
@@ -44,7 +43,6 @@ public class DtoConverter {
 		
 		category.setName(categoryDto.getName());
 		category.setReqName(categoryDto.getName());
-		category.setDeleted(categoryDto.isDeleted());
 		
 		return category;
 	}

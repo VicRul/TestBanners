@@ -37,7 +37,7 @@ public class Request {
 	@Setter
 	private String ipAddress;
 
-	@Column
+	@Column(updatable = false)
 	private LocalDateTime date = LocalDateTime.now();
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
