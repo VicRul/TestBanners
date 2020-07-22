@@ -1,7 +1,5 @@
 package test.jarsoft.banners.dto;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +14,5 @@ public class BannerDto {
 	private int price;
 	private CategoryDto categoryDto;
 	private String content;
-	private List<RequestDto> requestsDto;
 	private boolean deleted;
 }
