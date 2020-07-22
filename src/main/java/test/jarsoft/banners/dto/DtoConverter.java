@@ -16,19 +16,18 @@ public class DtoConverter {
 				.price(banner.getPrice())
 				.content(banner.getContent())
 				.deleted(banner.isDeleted())
-				.categoryDto(categoryToCategoryDto(banner.getCategory()))
-				.build();
+				.build();			
 	}
 	
 	public Banner bannerDtoToBanner(BannerDto bannerDto) {
-		return Banner.builder()
-				.id(bannerDto.getId())
-				.name(bannerDto.getName())
-				.price(bannerDto.getPrice())
-				.content(bannerDto.getContent())
-				.deleted(bannerDto.isDeleted())
-				.category(categoryDtoToCategory(bannerDto.getCategoryDto()))
-				.build();
+		Banner banner = new Banner();
+		
+		banner.setContent(bannerDto.getContent());
+		banner.setName(bannerDto.getName());
+		banner.setPrice(bannerDto.getPrice());
+		banner.setDeleted(bannerDto.isDeleted());
+		
+		return banner;
 	}
 	
 	public CategoryDto categoryToCategoryDto(Category category) {
@@ -41,12 +40,13 @@ public class DtoConverter {
 	}
 	
 	public Category categoryDtoToCategory(CategoryDto categoryDto) {
-		return Category.builder()
-				.id(categoryDto.getId())
-				.name(categoryDto.getName())
-				.reqName(categoryDto.getReqName())
-				.deleted(categoryDto.isDeleted())
-				.build();
+		Category category = new Category();
+		
+		category.setName(categoryDto.getName());
+		category.setReqName(categoryDto.getName());
+		category.setDeleted(categoryDto.isDeleted());
+		
+		return category;
 	}
 	
 	public RequestDto requestToRequestDto(Request request) {
@@ -60,12 +60,11 @@ public class DtoConverter {
 	}
 	
 	public Request requestDtoToRequest(RequestDto requestDto) {
-		return Request.builder()
-				.id(requestDto.getId())
-				.banner(bannerDtoToBanner(requestDto.getBannerDto()))
-				.userAgent(requestDto.getUserAgent())
-				.ipAddress(requestDto.getIpAddress())
-				.date(requestDto.getDate())
-				.build();
+		Request request = new Request();
+		
+		request.setIpAddress(requestDto.getIpAddress());
+		request.setUserAgent(requestDto.getUserAgent());
+		
+		return request;
 	}
 }

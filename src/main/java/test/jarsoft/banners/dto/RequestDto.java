@@ -1,6 +1,6 @@
 package test.jarsoft.banners.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,6 +14,6 @@ public class RequestDto {
 	private long id;
 	private String userAgent;
 	private String ipAddress;
-	private Date date;
+	private LocalDateTime date;
 	private BannerDto bannerDto;
 }

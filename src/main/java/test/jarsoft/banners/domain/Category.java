@@ -36,6 +36,7 @@ public class Category {
 	private String reqName;
 
 	@Column
+	@Setter
 	private boolean deleted = false;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "category")

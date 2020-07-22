@@ -43,6 +43,7 @@ public class Banner {
 	private String content;
 
 	@Column
+	@Setter
 	private boolean deleted = false;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
