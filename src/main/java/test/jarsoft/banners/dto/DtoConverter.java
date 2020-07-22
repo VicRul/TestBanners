@@ -16,6 +16,7 @@ public class DtoConverter {
 				.price(banner.getPrice())
 				.content(banner.getContent())
 				.deleted(banner.isDeleted())
+				.categoryDto(categoryToCategoryDto(banner.getCategory()))
 				.build();			
 	}
 	

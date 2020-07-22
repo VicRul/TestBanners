@@ -8,9 +8,12 @@ import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 import test.jarsoft.banners.domain.Banner;
+import test.jarsoft.banners.domain.Category;
 import test.jarsoft.banners.dto.BannerDto;
+import test.jarsoft.banners.dto.CategoryDto;
 import test.jarsoft.banners.dto.DtoConverter;
 import test.jarsoft.banners.repos.BannerRepo;
+import test.jarsoft.banners.repos.CategoryRepo;
 import test.jarsoft.banners.services.BannerService;
 
 @Service
@@ -18,10 +21,13 @@ import test.jarsoft.banners.services.BannerService;
 public class BannerServiceImpl implements BannerService {
 
 	private final BannerRepo bannerRepo;
+	private final CategoryRepo categoryRepo;
 	private final DtoConverter dtoConverter;
 	
 	@Override
-	public BannerDto createBanner(BannerDto bannerDto) {
+	public BannerDto createBanner(BannerDto bannerDto, int categoryId) {
+		CategoryDto categoryDto = dtoConverter.categoryToCategoryDto(categoryRepo.findById(categoryId));
+		bannerDto.setCategoryDto(categoryDto);
 		Banner newBanner = bannerRepo.save(dtoConverter.bannerDtoToBanner(bannerDto));
 		return dtoConverter.bannerToBannerDto(newBanner);
 	}
