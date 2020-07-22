@@ -42,7 +42,7 @@ public class DtoConverter {
 		Category category = new Category();
 		
 		category.setName(categoryDto.getName());
-		category.setReqName(categoryDto.getName());
+		category.setReqName(categoryDto.getReqName());
 		
 		return category;
 	}

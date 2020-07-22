@@ -1,5 +1,8 @@
 package test.jarsoft.banners.services.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -29,11 +32,19 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 	
 	@Override
-	public CategoryDto updateCategory(CategoryDto categoryDtoFromDB, CategoryDto categoryDto) {
-		Category categoryFromDB = dtoConverter.categoryDtoToCategory(categoryDtoFromDB);
+	public CategoryDto updateCategory(int categoryId, CategoryDto categoryDto) {
+		Category categoryFromDB = categoryRepo.findById(categoryId);
 		Category category = dtoConverter.categoryDtoToCategory(categoryDto);
-		BeanUtils.copyProperties(category, categoryFromDB, "id");
+		BeanUtils.copyProperties(category, categoryFromDB);
 		return dtoConverter.categoryToCategoryDto(categoryRepo.save(categoryFromDB));
+	}
+
+	@Override
+	public List<CategoryDto> getAllCategories() {
+		return categoryRepo.findAll()
+				.stream()
+				.map(dtoConverter::categoryToCategoryDto)
+				.collect(Collectors.toList());
 	}	
 	
 }

@@ -1,5 +1,7 @@
 package test.jarsoft.banners.services;
 
+import java.util.List;
+
 import test.jarsoft.banners.dto.CategoryDto;
 
 public interface CategoryService {
@@ -8,5 +10,7 @@ public interface CategoryService {
 	
 	void deleteCategory(int categoryId);
 
-	CategoryDto updateCategory(CategoryDto categoryDtoFromDB, CategoryDto categoryDto);
+	CategoryDto updateCategory(int categoryId, CategoryDto categoryDto);
+	
+	List<CategoryDto> getAllCategories();
 }

@@ -11,4 +11,6 @@ public interface CategoryRepo extends JpaRepository<Category, Integer> {
 	@Modifying
 	@Query("update Category c set c.deleted = true where c.id = ?1")
 	void deleteCategory(int id);
+	
+	Category findById(int id);
 }
