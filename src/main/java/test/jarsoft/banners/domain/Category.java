@@ -10,17 +10,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import test.jarsoft.banners.util.EntityIdResolver;
 
 @NoArgsConstructor
 @Getter
 @EqualsAndHashCode(of = {"name", "reqName"})
 @ToString(of = {"id", "name", "reqName"})
 @Entity
+@JsonIdentityInfo(
+		generator = ObjectIdGenerators.PropertyGenerator.class,
+		scope = Category.class,
+		resolver = EntityIdResolver.class,
+		property = "id"
+)
 public class Category {
 	
 	@Id

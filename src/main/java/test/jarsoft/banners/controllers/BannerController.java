@@ -27,11 +27,9 @@ private final BannerService bannerService;
 		
 	}
 	
-	@PostMapping("/save/{id}")
-	public BannerDto createBanner(
-			@PathVariable("id") int categoryId, 
-			@RequestBody BannerDto bannerDto) {
-		return bannerService.createBanner(bannerDto, categoryId);
+	@PostMapping("/save")
+	public BannerDto createBanner(@RequestBody BannerDto bannerDto) {
+		return bannerService.createBanner(bannerDto);
 	}
 	
 	@PutMapping("/delete/{id}")

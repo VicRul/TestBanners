@@ -26,6 +26,7 @@ public class DtoConverter {
 		banner.setContent(bannerDto.getContent());
 		banner.setName(bannerDto.getName());
 		banner.setPrice(bannerDto.getPrice());
+		banner.setCategory(categoryDtoToCategory(bannerDto.getCategoryDto()));
 		
 		return banner;
 	}

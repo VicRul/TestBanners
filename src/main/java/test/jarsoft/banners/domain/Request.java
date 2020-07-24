@@ -46,4 +46,12 @@ public class Request {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "banner_id", nullable = false)
 	private Banner banner;
+
+	public Request(String userAgent, String ipAddress, LocalDateTime date, Banner banner) {
+		this.userAgent = userAgent;
+		this.ipAddress = ipAddress;
+		this.date = date;
+		this.banner = banner;
+	}
+	
 }

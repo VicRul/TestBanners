@@ -6,7 +6,7 @@ import test.jarsoft.banners.dto.BannerDto;
 
 public interface BannerService {
 
-	BannerDto createBanner(BannerDto bannerDto, int categoryId);
+	BannerDto createBanner(BannerDto bannerDto);
 
 	void deleteBanner(int bannerId);
 

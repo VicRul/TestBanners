@@ -27,17 +27,17 @@ public class CategoryController {
 		
 	}
 	
-	@PostMapping("/save")
+	@PostMapping
 	public CategoryDto createCategory(@RequestBody CategoryDto categoryDto) {
 		return categoryService.createCategory(categoryDto);
 	}
 	
-	@PutMapping("/delete/{id}")
+	@PutMapping("/{id}")
 	public void deleteCategory(@PathVariable("id") int categoryId) {
 		categoryService.deleteCategory(categoryId);
 	}
 	
-	@PutMapping("/update/{id}")
+	@PutMapping("/delete/{id}")
 	public CategoryDto updateCategory(
 			@PathVariable("id") int categoryId, 
 			@RequestBody CategoryDto category
