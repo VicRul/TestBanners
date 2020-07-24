@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
-import test.jarsoft.banners.dto.BannerDto;
+import test.jarsoft.banners.domain.Banner;
 import test.jarsoft.banners.services.BannerService;
 
 @RestController
@@ -22,14 +22,14 @@ public class BannerController {
 private final BannerService bannerService;
 	
 	@GetMapping
-	public List<BannerDto> getAllBanners() {
+	public List<Banner> getAllBanners() {
 		return bannerService.getAllBanners();
 		
 	}
 	
 	@PostMapping("/save")
-	public BannerDto createBanner(@RequestBody BannerDto bannerDto) {
-		return bannerService.createBanner(bannerDto);
+	public Banner createBanner(@RequestBody Banner banner) {
+		return bannerService.createBanner(banner);
 	}
 	
 	@PutMapping("/delete/{id}")
@@ -38,9 +38,9 @@ private final BannerService bannerService;
 	}
 	
 	@PutMapping("/update/{id}")
-	public BannerDto updateBanner(
+	public Banner updateBanner(
 			@PathVariable("id") int bannerId, 
-			@RequestBody BannerDto banner
+			@RequestBody Banner banner
 			) {
 		return bannerService.updateBanner(bannerId, banner);
 	}

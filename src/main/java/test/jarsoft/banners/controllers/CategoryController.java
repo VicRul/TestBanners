@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
-import test.jarsoft.banners.dto.CategoryDto;
+import test.jarsoft.banners.domain.Category;
 import test.jarsoft.banners.services.CategoryService;
 
 @RestController
@@ -22,14 +22,14 @@ public class CategoryController {
 	private final CategoryService categoryService;
 	
 	@GetMapping
-	public List<CategoryDto> getAllCategories() {
+	public List<Category> getAllCategories() {
 		return categoryService.getAllCategories();
 		
 	}
 	
 	@PostMapping
-	public CategoryDto createCategory(@RequestBody CategoryDto categoryDto) {
-		return categoryService.createCategory(categoryDto);
+	public Category createCategory(@RequestBody Category category) {
+		return categoryService.createCategory(category);
 	}
 	
 	@PutMapping("/{id}")
@@ -38,9 +38,9 @@ public class CategoryController {
 	}
 	
 	@PutMapping("/delete/{id}")
-	public CategoryDto updateCategory(
+	public Category updateCategory(
 			@PathVariable("id") int categoryId, 
-			@RequestBody CategoryDto category
+			@RequestBody Category category
 			) {
 		return categoryService.updateCategory(categoryId, category);
 	}

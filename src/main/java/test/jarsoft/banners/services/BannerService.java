@@ -2,15 +2,15 @@ package test.jarsoft.banners.services;
 
 import java.util.List;
 
-import test.jarsoft.banners.dto.BannerDto;
+import test.jarsoft.banners.domain.Banner;
 
 public interface BannerService {
 
-	BannerDto createBanner(BannerDto bannerDto);
+	Banner createBanner(Banner bannerDto);
 
 	void deleteBanner(int bannerId);
 
-	BannerDto updateBanner(int bannerId, BannerDto bannerDto);
+	Banner updateBanner(int bannerId, Banner banner);
 
-	List<BannerDto> getAllBanners();
+	List<Banner> getAllBanners();
 }

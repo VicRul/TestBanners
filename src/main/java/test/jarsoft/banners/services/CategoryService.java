@@ -2,15 +2,15 @@ package test.jarsoft.banners.services;
 
 import java.util.List;
 
-import test.jarsoft.banners.dto.CategoryDto;
+import test.jarsoft.banners.domain.Category;
 
 public interface CategoryService {
 	
-	CategoryDto createCategory(CategoryDto categoryDto);
+	Category createCategory(Category categoryDto);
 	
 	void deleteCategory(int categoryId);
 
-	CategoryDto updateCategory(int categoryId, CategoryDto categoryDto);
+	Category updateCategory(int categoryId, Category category);
 	
-	List<CategoryDto> getAllCategories();
+	List<Category> getAllCategories();
 }
