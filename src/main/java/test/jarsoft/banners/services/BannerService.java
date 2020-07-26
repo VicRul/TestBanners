@@ -8,9 +8,9 @@ public interface BannerService {
 
 	Banner createBanner(Banner bannerDto);
 
-	void deleteBanner(int bannerId);
+	void deleteBanner(long bannerId);
 
-	Banner updateBanner(int bannerId, Banner banner);
+	Banner updateBanner(long bannerId, Banner banner);
 
 	List<Banner> getAllBanners();
 }

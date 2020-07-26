@@ -15,9 +15,9 @@ public interface BannerRepo extends JpaRepository<Banner, Long> {
 	@Modifying
     @Transactional
 	@Query("update Banner b set b.deleted = true where b.id = :id")
-	void deleteBanner(@Param("id") int id);
+	void deleteBanner(@Param("id") long id);
 	
-	Banner findById(int id);
+	Banner findById(long id);
 	
 	@Modifying
 	@Query("select b from Banner b where b.deleted = false")

@@ -23,12 +23,12 @@ public class BannerServiceImpl implements BannerService {
 	}
 	
 	@Override
-	public void deleteBanner(int bannerId) {
+	public void deleteBanner(long bannerId) {
 		bannerRepo.deleteBanner(bannerId);
 	}
 	
 	@Override
-	public Banner updateBanner(int bannerId, Banner banner) {
+	public Banner updateBanner(long bannerId, Banner banner) {
 		Banner bannerFromDB = bannerRepo.findById(bannerId);
 		BeanUtils.copyProperties(banner, bannerFromDB);
 		return bannerRepo.save(bannerFromDB);

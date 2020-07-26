@@ -33,13 +33,13 @@ private final BannerService bannerService;
 	}
 	
 	@PutMapping("/delete/{id}")
-	public void deleteBanner(@PathVariable("id") int bannerId) {
+	public void deleteBanner(@PathVariable("id") long bannerId) {
 		bannerService.deleteBanner(bannerId);
 	}
 	
 	@PutMapping("/update/{id}")
 	public Banner updateBanner(
-			@PathVariable("id") int bannerId, 
+			@PathVariable("id") long bannerId, 
 			@RequestBody Banner banner
 			) {
 		return bannerService.updateBanner(bannerId, banner);

@@ -62,6 +62,5 @@ public class Banner {
 		this.price = price;
 		this.content = content;
 		this.category = category;
-	}
-	
+	}	
 }
