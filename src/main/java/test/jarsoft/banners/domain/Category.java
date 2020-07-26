@@ -1,14 +1,10 @@
 package test.jarsoft.banners.domain;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -48,9 +44,6 @@ public class Category {
 	@Column
 	@Setter
 	private boolean deleted = false;
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "category")
-	private List<Banner> banners;
 
 	public Category(String name, String reqName) {
 		this.name = name;

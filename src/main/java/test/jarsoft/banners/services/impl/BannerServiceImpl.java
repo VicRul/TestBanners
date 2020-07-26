@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 import test.jarsoft.banners.domain.Banner;
+import test.jarsoft.banners.dto.BannerDto;
+import test.jarsoft.banners.dto.DtoConverter;
 import test.jarsoft.banners.repos.BannerRepo;
 import test.jarsoft.banners.services.BannerService;
 
@@ -16,10 +18,12 @@ import test.jarsoft.banners.services.BannerService;
 public class BannerServiceImpl implements BannerService {
 
 	private final BannerRepo bannerRepo;
+	private final DtoConverter dtoConverter;
 	
 	@Override
-	public Banner createBanner(Banner banner) {
-		return bannerRepo.save(banner);
+	public BannerDto createBanner(BannerDto bannerDto) {
+		Banner newBanner = bannerRepo.save(dtoConverter.bannerDtoToBanner(bannerDto));
+		return dtoConverter.bannerToBannerDto(newBanner);
 	}
 	
 	@Override
@@ -28,16 +32,18 @@ public class BannerServiceImpl implements BannerService {
 	}
 	
 	@Override
-	public Banner updateBanner(long bannerId, Banner banner) {
+	public BannerDto updateBanner(int bannerId, BannerDto bannerDto) {
 		Banner bannerFromDB = bannerRepo.findById(bannerId);
+		Banner banner = dtoConverter.bannerDtoToBanner(bannerDto);
 		BeanUtils.copyProperties(banner, bannerFromDB);
-		return bannerRepo.save(bannerFromDB);
+		return dtoConverter.bannerToBannerDto(bannerRepo.save(bannerFromDB));
 	}
 
 	@Override
-	public List<Banner> getAllBanners() {
+	public List<BannerDto> getAllBanners() {
 		return bannerRepo.showAllBanners()
 				.stream()
+				.map(dtoConverter::bannerToBannerDto)
 				.collect(Collectors.toList());
 	}
 }
