@@ -33,11 +33,11 @@ public class CategoryController {
 	}
 	
 	@PutMapping("/{id}")
-	public void deleteCategory(@PathVariable("id") int categoryId) {
-		categoryService.deleteCategory(categoryId);
+	public String deleteCategory(@PathVariable("id") int categoryId) {
+		return categoryService.deleteCategory(categoryId);
 	}
 	
-	@PutMapping("/delete/{id}")
+	@PutMapping("/update/{id}")
 	public CategoryDto updateCategory(
 			@PathVariable("id") int categoryId, 
 			@RequestBody CategoryDto categoryDto
