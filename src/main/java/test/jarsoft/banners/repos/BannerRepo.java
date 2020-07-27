@@ -22,4 +22,6 @@ public interface BannerRepo extends JpaRepository<Banner, Long> {
 	@Modifying
 	@Query("select b from Banner b where b.deleted = false")
 	List<Banner> showAllBanners();
+	
+	Banner findByName(String name);
 }

@@ -25,8 +25,13 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public CategoryDto createCategory(CategoryDto categoryDto) {
-		Category newCategory = categoryRepo.save(dtoConverter.categoryDtoToCategory(categoryDto));
-		return dtoConverter.categoryToCategoryDto(newCategory);
+
+		if (duplicateCheck(categoryDto) != null) {
+			return duplicateCheck(categoryDto);
+		}
+
+		return dtoConverter.categoryToCategoryDto(categoryRepo.save(dtoConverter.categoryDtoToCategory(categoryDto)));
+
 	}
 
 	@Override
@@ -34,7 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
 		List<BannerDto> notDeletedBanners = notDeletedBanners(categoryId);
 		if (notDeletedBanners.isEmpty()) {
 			categoryRepo.deleteCategory(categoryId);
-			return "Выполнено";
+			return "Done";
 		}
 		return notDeletedBanners(categoryId).toString();
 	}
@@ -42,6 +47,13 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public CategoryDto updateCategory(int categoryId, CategoryDto categoryDto) {
 		Category categoryFromDB = categoryRepo.findById(categoryId);
+		System.out.println(categoryFromDB.toString());
+		System.out.println(categoryDto.toString());
+		
+		if (duplicateCheck(categoryDto) != null) {
+			return duplicateCheck(categoryDto);
+		}
+		
 		Category category = dtoConverter.categoryDtoToCategory(categoryDto);
 		BeanUtils.copyProperties(category, categoryFromDB);
 		return dtoConverter.categoryToCategoryDto(categoryRepo.save(categoryFromDB));
@@ -66,5 +78,12 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 
 		return notDeletedBanners.stream().map(dtoConverter::bannerToBannerDto).collect(Collectors.toList());
+	}
+
+	@Override
+	public CategoryDto duplicateCheck(CategoryDto categoryDto) {
+
+		Category newCategory = categoryRepo.findByNameOrReqName(categoryDto.getName(), categoryDto.getReqName());
+		return (newCategory != null) ? dtoConverter.categoryToCategoryDto(newCategory) : null;
 	}
 }

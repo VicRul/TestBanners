@@ -13,4 +13,6 @@ public interface BannerService {
 	BannerDto updateBanner(int bannerId, BannerDto bannerDto);
 
 	List<BannerDto> getAllBanners();
+	
+	BannerDto duplicateCheck(BannerDto bannerDto);
 }

@@ -13,13 +13,15 @@ import test.jarsoft.banners.domain.Category;
 public interface CategoryRepo extends JpaRepository<Category, Integer> {
 
 	@Modifying
-    @Transactional
+	@Transactional
 	@Query("update Category c set c.deleted = true where c.id = :id")
 	void deleteCategory(@Param("id") int id);
-	
+
 	Category findById(int id);
-	
+
 	@Modifying
 	@Query("select c from Category c where c.deleted = false")
 	List<Category> showAllCategories();
+
+	Category findByNameOrReqName(String name, String reqName);
 }

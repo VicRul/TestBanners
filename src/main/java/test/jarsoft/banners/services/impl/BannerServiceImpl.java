@@ -19,21 +19,31 @@ public class BannerServiceImpl implements BannerService {
 
 	private final BannerRepo bannerRepo;
 	private final DtoConverter dtoConverter;
-	
+
 	@Override
 	public BannerDto createBanner(BannerDto bannerDto) {
-		Banner newBanner = bannerRepo.save(dtoConverter.bannerDtoToBanner(bannerDto));
-		return dtoConverter.bannerToBannerDto(newBanner);
+
+		if (duplicateCheck(bannerDto) != null) {
+			return duplicateCheck(bannerDto);
+		}
+		
+		return dtoConverter.bannerToBannerDto(bannerRepo.save(dtoConverter.bannerDtoToBanner(bannerDto)));
 	}
-	
+
 	@Override
 	public void deleteBanner(long bannerId) {
 		bannerRepo.deleteBanner(bannerId);
 	}
-	
+
 	@Override
 	public BannerDto updateBanner(int bannerId, BannerDto bannerDto) {
+		
 		Banner bannerFromDB = bannerRepo.findById(bannerId);
+		
+		if (duplicateCheck(bannerDto) != null) {
+			return duplicateCheck(bannerDto);
+		}
+		
 		Banner banner = dtoConverter.bannerDtoToBanner(bannerDto);
 		BeanUtils.copyProperties(banner, bannerFromDB);
 		return dtoConverter.bannerToBannerDto(bannerRepo.save(bannerFromDB));
@@ -41,9 +51,13 @@ public class BannerServiceImpl implements BannerService {
 
 	@Override
 	public List<BannerDto> getAllBanners() {
-		return bannerRepo.showAllBanners()
-				.stream()
-				.map(dtoConverter::bannerToBannerDto)
-				.collect(Collectors.toList());
+		return bannerRepo.showAllBanners().stream().map(dtoConverter::bannerToBannerDto).collect(Collectors.toList());
+	}
+
+	@Override
+	public BannerDto duplicateCheck(BannerDto bannerDto) {
+		
+		Banner newBanner = bannerRepo.findByName(bannerDto.getName());
+		return (newBanner != null) ? dtoConverter.bannerToBannerDto(newBanner) : null;
 	}
 }

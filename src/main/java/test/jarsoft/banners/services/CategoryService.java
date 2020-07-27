@@ -16,4 +16,6 @@ public interface CategoryService {
 	List<CategoryDto> getAllCategories();
 	
 	List<BannerDto> notDeletedBanners(int id);
+	
+	CategoryDto duplicateCheck(CategoryDto categoryDto);
 }
